@@ -26,7 +26,7 @@ const SocketProvider = ({ children }: Props) => {
       return;
     }
 
-    const newSocket = io(import.meta.env.VITE_BASE_URL, {
+    const newSocket = io(import.meta.env.VITE_BASE_URL ||"https://tracking-backend-27mi.onrender.com", {
       auth: { token },
       withCredentials: true,
     });
