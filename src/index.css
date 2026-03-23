@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ─── Map Markers ─── */
+.marker-current {
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3), 0 2px 8px rgba(0,0,0,0.3);
+  animation: pulse-marker 2s ease-in-out infinite;
+}
+
+/* Nearby user marker — wrapper with initial label */
+.marker-nearby-wrapper {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+.marker-nearby-wrapper .marker-nearby {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3), 0 2px 10px rgba(0,0,0,0.4);
+  animation: pulse-nearby 2.5s ease-in-out infinite;
+}
+.marker-nearby-wrapper .marker-nearby-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Fallback plain nearby marker (no wrapper) */
+.marker-nearby {
+  width: 20px;
+  height: 20px;
+  background: var(--color-danger);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3), 0 2px 6px rgba(0,0,0,0.3);
+}
+
+@keyframes pulse-marker {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3), 0 2px 8px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 0 0 14px rgba(99, 102, 241, 0.08), 0 2px 8px rgba(0,0,0,0.3); }
+}
+@keyframes pulse-nearby {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3), 0 2px 10px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0.1), 0 2px 10px rgba(0,0,0,0.4); }
+}
+
+/* Notification animation */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-out {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+.notification-enter {
+  animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.notification-exit {
+  animation: slide-out 0.3s ease-in forwards;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* ─── Leaflet Overrides ─── */
+.leaflet-container {
+  border-radius: 16px;
+  z-index: 1;
+}
+.leaflet-control-zoom a {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+}
+.leaflet-popup-tip {
+  background: var(--color-bg-card) !important;
+}
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ─── Hero / Auth page patterns ─── */
+.hero-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.45) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -18px, 0); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, 16px, 0); }
+}
+.animate-float {
+  animation: float 9s ease-in-out infinite;
+}
+.animate-float2 {
+  animation: float2 11s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float2 {
+    animation: none !important;
+  }
+}
